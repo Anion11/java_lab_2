@@ -3,10 +3,10 @@ package com.example.iterator;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 public class ImageAgregate implements Agreagate{
-    private String filetop;
-    private Image bi;
+    private final String filetop;
     public ImageAgregate(String filetop) {
         this.filetop = filetop;
     }
@@ -14,21 +14,34 @@ public class ImageAgregate implements Agreagate{
     public ImageIterator getIterator() {
         return new ImageIterator();
     }
-    public class ImageIterator implements Iterator{
-        private int current = 1;
-        private String getRoute(){
-            return  filetop + current + ".png";
+    public class ImageIterator implements Iterator {
+        private int current = 0;
+        private String getRoute(int i){
+            return Paths.get(filetop + i + ".png").toUri().toString();
         }
         public boolean hasNext() {
-            File file = new File(getRoute());
-            return  file.canRead();
+            return !new Image(getRoute(current + 1)).isError();
         }
-
+        @Override
+        public boolean hasPreview() {
+            return !new Image(getRoute(current - 1)).isError();
+        }
         @Override
         public Image next() {
-            Image img = new Image(getRoute());
-            current++;
-            return img;
+            return new Image(getRoute(++current));
+        }
+        @Override
+        public Image preview() {
+            return new Image(getRoute(--current));
+        }
+        public Image startImage() {
+            current = 1;
+            return new Image(getRoute(current));
+        }
+        @Override
+        public Image endImage() {
+            current = 3;
+            return new Image(getRoute(current));
         }
     }
 }

@@ -5,16 +5,21 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="471.0" prefWidth="434.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iterator.HelloController">
+<VBox alignment="CENTER" prefHeight="471.0" prefWidth="434.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iterator.IteratorController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
+      <Label text="Введите задержку" />
+      <TextField fx:id="inputDelay" />
+      <Button fx:id="btnStart" mnemonicParsing="false" onAction="#onStartButtonClick" text="Начать" />
+      <Button fx:id="btnStop" mnemonicParsing="false" onAction="#onStopButtonClick" text="Стоп" />
       <ImageView fx:id="imageView" fitHeight="259.0" fitWidth="281.0" pickOnBounds="true" preserveRatio="true" />
-      <FlowPane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btn" onAction="#onHelloButtonClick" mnemonicParsing="false" text="Button" />
+            <Button fx:id="btnPrev" layoutX="134.0" mnemonicParsing="false" onAction="#onPrevButtonClick" text="Назад" />
+            <Button fx:id="btnNext" alignment="CENTER" contentDisplay="RIGHT" layoutX="212.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Вперед" />
          </children>
-      </FlowPane>
+      </Pane>
    </children>
 </VBox>
